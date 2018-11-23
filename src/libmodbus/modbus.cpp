@@ -722,7 +722,7 @@ static int response_io_status(uint8_t *tab_io_status,
 static int response_exception(modbus_t *ctx, sft_t *sft,
                               int exception_code, uint8_t *rsp,
                               unsigned int to_flush,
-                              const char* template, ...)
+                              const char* cpptemplate, ...)
 {
     int rsp_length;
 
@@ -730,8 +730,8 @@ static int response_exception(modbus_t *ctx, sft_t *sft,
     if (ctx->debug) {
         va_list ap;
 
-        va_start(ap, template);
-        vfprintf(stderr, template, ap);
+        va_start(ap, cpptemplate);
+        vfprintf(stderr, cpptemplate, ap);
         va_end(ap);
     }
 
@@ -989,10 +989,10 @@ int modbus_reply(modbus_t *ctx, const uint8_t *req,
                 address);
         } else {
             uint16_t data = mb_mapping->tab_registers[mapping_address];
-            uint16_t and = (req[offset + 3] << 8) + req[offset + 4];
-            uint16_t or = (req[offset + 5] << 8) + req[offset + 6];
+            uint16_t cppand = (req[offset + 3] << 8) + req[offset + 4];
+            uint16_t cor = (req[offset + 5] << 8) + req[offset + 6];
 
-            data = (data & and) | (or & (~and));
+            data = (data & cppand) | (cor & (~cppand));
             mb_mapping->tab_registers[mapping_address] = data;
             memcpy(rsp, req, req_length);
             rsp_length = req_length;
