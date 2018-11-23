@@ -1330,7 +1330,7 @@ const modbus_backend_t _modbus_rtu_backend = {
 };
 
 #ifdef ARDUINO
-modbus_t* modbus_new_rtu(unsigned long baud, uint16_t config)
+modbus_t* modbus_new_rtu(RS485Class *ser,unsigned long baud, uint16_t config)
 #else
 modbus_t* modbus_new_rtu(const char *device,
                          int baud, char parity, int data_bit,
@@ -1364,6 +1364,7 @@ modbus_t* modbus_new_rtu(const char *device,
 #ifdef ARDUINO
     ctx_rtu->baud = baud;
     ctx_rtu->config = config;
+    ctx_rtu->device=ser;
 #else
     ctx_rtu->device = NULL;
 

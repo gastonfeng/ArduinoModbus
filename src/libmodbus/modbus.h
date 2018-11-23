@@ -20,7 +20,9 @@
 #endif
 
 #include "modbus-version.h"
-
+#ifdef ARDUINO
+#include <ArduinoRS485.h>
+#endif
 #if defined(_MSC_VER)
 # if defined(DLLBUILD)
 /* define DLLBUILD when building the DLL */

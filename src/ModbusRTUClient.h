@@ -35,7 +35,7 @@ public:
    *
    * Return 1 on success, 0 on failure
    */
-  int begin(unsigned long baudrate, uint16_t config = SERIAL_8N1);
+  int begin(RS485Class*,unsigned long baudrate, uint16_t config = SERIAL_8N1);
 };
 
 extern ModbusRTUClientClass ModbusRTUClient;

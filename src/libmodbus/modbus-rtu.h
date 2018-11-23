@@ -18,7 +18,7 @@ MODBUS_BEGIN_DECLS
 #define MODBUS_RTU_MAX_ADU_LENGTH  256
 
 #ifdef ARDUINO
-MODBUS_API modbus_t* modbus_new_rtu(unsigned long baud, uint16_t config);
+MODBUS_API modbus_t* modbus_new_rtu(RS485Class *,unsigned long baud, uint16_t config);
 #else
 MODBUS_API modbus_t* modbus_new_rtu(const char *device, int baud, char parity,
                                     int data_bit, int stop_bit);
